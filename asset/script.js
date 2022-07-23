@@ -55,23 +55,15 @@ var buttonClickHandler = function (event) {
 
 // This is for the search submit
 function getCitySearch(search) {
-  //api key is checked and working
-
   //ref https://openweathermap.org/current for api call for just city name
   // in the below url we are trying to pass a string of city name with the api url
-  /* var url =
-    "https://api.openweathermap.org/data/2.5/weather?q=sydney&appid=f2c131fc5bc12a5320fc9c5062b3a515";*/
+  // https://openweathermap.org/
 
-  // https://openweathermap.org/forecast5
-
-  //template literal try this first
-  // var url = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=f2c131fc5bc12a5320fc9c5062b3a515`;
   var url =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     search +
     "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515";
 
-  console.log(url);
   // localStorage.setItem("cityName", JSON.stringify(cityName));
   fetch(url)
     .then(function (response) {
@@ -89,11 +81,6 @@ function getCitySearch(search) {
         "&lon=" +
         longitude +
         "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5";
-      console.log(urlForecast);
-      console.log(data);
-      // console.log(data.main.temp);
-      // console.log(data.main.humidity);
-      // console.log(data.main.pressure);
 
       fetch(urlForecast)
         .then(function (response) {
@@ -101,7 +88,6 @@ function getCitySearch(search) {
         })
         .then(function (data, search) {
           for (i = 0; i < data.daily.length; i++) {
-            console.log(data.daily);
             console.log(data.daily[i].temp);
             console.log(data.daily[i].humidity);
             console.log(data.daily[i].weather);
@@ -110,10 +96,6 @@ function getCitySearch(search) {
             // var temp = data.list[i].main.temp;
             // weatherContainerEl.textContent = `Temp Today:${temp};`;
           }
-
-          // console.log(data.main.temp);
-          // console.log(data.main.humidity);
-          // console.log(data.main.pressure);
         });
     });
 }
@@ -121,7 +103,7 @@ function getCitySearch(search) {
 getCitySelect = function (selectCity) {
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectCity}&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5`;
   localStorage.setItem("selectCity", JSON.stringify(selectCity));
-  //what actually do we need from data's
+  //Which data's are required?
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
@@ -141,9 +123,6 @@ getCitySelect = function (selectCity) {
         "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5";
       console.log(apiurlForecast);
       console.log(data);
-      // console.log(data.main.temp);
-      // console.log(data.main.humidity);
-      // console.log(data.main.pressure);
 
       fetch(apiurlForecast)
         .then(function (response) {
@@ -151,29 +130,31 @@ getCitySelect = function (selectCity) {
         })
         .then(function (data, search) {
           console.log(data);
-          // console.log(data.current);
-          // console.log(data.main.temp);
-          // console.log(data.main.humidity);
-          // console.log(data.main.pressure);
-          for (i = 0; i < data.daily.length; i++) {
-            console.log(data.daily);
-            console.log(data.daily[i].temp);
-            console.log(data.daily[i].humidity);
-            console.log(data.daily[i].weather);
-            console.log(data.daily[i].wind_speed);
 
-            // var temp = data.list[i].main.temp;
-            // weatherContainerEl.textContent = `Temp Today:${temp};`;
+          for (i = 0; i < data.daily.length; i++) {
+            var date = data.daily[i].dt;
+            var date = moment.unix(date).format("MM/DD/YYYY");
+
+            temp = data.daily[i].temp.day;
+            icon = data.daily[i].weather[0].icon;
+            wind = data.daily[i].wind_speed;
+            humidity = data.daily[i].humidity;
+
+            weatherContainerEl.textContent = `Temp icon:${icon};
+          Temp Today:${temp};
+          Temp wind:${wind};
+          Temp humidity:${humidity};`;
           }
         });
     });
 };
-// var displayWeather=function(weather,search)
 
+// var displayWeather = function (weather, search) {};
 //the bit we need now is to make the api to work and how to get the 5 days information within the columns provided or will we create new columns for this?
 
-//has everything been linked
 submit[0].addEventListener("click", formSubmitHandler);
 cityButtonsEl.addEventListener("click", buttonClickHandler);
 
 // display and visualisation part left
+
+// https://openweathermap.org/weather-conditions how to include the images?
