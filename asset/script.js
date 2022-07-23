@@ -27,7 +27,7 @@ var formSubmitHandler = function (event) {
   event.preventDefault();
 
   var cityName = searchInputEl.value.trim();
-  localStorage.setItem("cityName", JSON.stringify(cityName));
+
   if (cityName) {
     getCitySearch(cityName);
     weatherContainerEl.textContent = "";
@@ -45,7 +45,6 @@ var buttonClickHandler = function (event) {
   event.preventDefault();
   //the name of city choices given on the beginning
   var selectCity = event.target.getAttribute("data-city");
-  localStorage.setItem("selectCity", JSON.stringify(selectCity));
 
   if (selectCity) {
     getCitySelect(selectCity);
@@ -66,23 +65,62 @@ function getCitySearch(search) {
   // https://openweathermap.org/forecast5
 
   //template literal try this first
-  var url = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=f2c131fc5bc12a5320fc9c5062b3a515`;
+  // var url = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=f2c131fc5bc12a5320fc9c5062b3a515`;
+  var url =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    search +
+    "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515";
+
   console.log(url);
+  // localStorage.setItem("cityName", JSON.stringify(cityName));
   fetch(url)
     .then(function (response) {
       return response.json();
     })
     .then(function (data, search) {
-      console.log(data.list);
+      var latitude = data.coord.lat;
+      var longitude = data.coord.lon;
+      console.log(latitude, longitude);
+      console.log(data);
+
+      var urlForecast =
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5";
+      console.log(urlForecast);
+      console.log(data);
       // console.log(data.main.temp);
       // console.log(data.main.humidity);
       // console.log(data.main.pressure);
+
+      fetch(urlForecast)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data, search) {
+          for (i = 0; i < data.daily.length; i++) {
+            console.log(data.daily);
+            console.log(data.daily[i].temp);
+            console.log(data.daily[i].humidity);
+            console.log(data.daily[i].weather);
+            console.log(data.daily[i].wind_speed);
+
+            // var temp = data.list[i].main.temp;
+            // weatherContainerEl.textContent = `Temp Today:${temp};`;
+          }
+
+          // console.log(data.main.temp);
+          // console.log(data.main.humidity);
+          // console.log(data.main.pressure);
+        });
     });
 }
 //this API is for the provided city
 getCitySelect = function (selectCity) {
-  var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${selectCity}&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5`;
-
+  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${selectCity}&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5`;
+  localStorage.setItem("selectCity", JSON.stringify(selectCity));
   //what actually do we need from data's
   fetch(apiUrl)
     .then(function (response) {
@@ -90,20 +128,44 @@ getCitySelect = function (selectCity) {
     })
     .then(function (data, selectCity) {
       console.log(data);
+      var latitude = data.coord.lat;
+      var longitude = data.coord.lon;
+      console.log(latitude, longitude);
+      console.log(data);
 
-      for (i = 0; i < data.list.length; i++) {
-        d = new Date();
-        console.log(d);
-        console.log(data.city.name);
-        console.log(data.list[i].dt_txt);
-        console.log(data.list[i].main.temp);
-        console.log(data.list[i].main.humidity);
-        console.log(data.list[i].wind.speed);
-        console.log(data.list[i].main.humidity);
+      var apiurlForecast =
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&units=imperial&appid=f2c131fc5bc12a5320fc9c5062b3a515&cnt=5";
+      console.log(apiurlForecast);
+      console.log(data);
+      // console.log(data.main.temp);
+      // console.log(data.main.humidity);
+      // console.log(data.main.pressure);
 
-        var temp = data.list[i].main.temp;
-        weatherContainerEl.textContent = `Temp Today:${temp};`;
-      }
+      fetch(apiurlForecast)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data, search) {
+          console.log(data);
+          // console.log(data.current);
+          // console.log(data.main.temp);
+          // console.log(data.main.humidity);
+          // console.log(data.main.pressure);
+          for (i = 0; i < data.daily.length; i++) {
+            console.log(data.daily);
+            console.log(data.daily[i].temp);
+            console.log(data.daily[i].humidity);
+            console.log(data.daily[i].weather);
+            console.log(data.daily[i].wind_speed);
+
+            // var temp = data.list[i].main.temp;
+            // weatherContainerEl.textContent = `Temp Today:${temp};`;
+          }
+        });
     });
 };
 // var displayWeather=function(weather,search)
