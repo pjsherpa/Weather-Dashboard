@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather Dashboard</title>
+    <!-- bootstrap linked -->
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="asset/style.css">
+
+ <body class=flex-column min-100-vh>
+  <main class="flex-row justify-space-between">
+<h1>Weather Dashboard</h1>
+
+<!-- ref https://getbootstrap.com/docs/5.2/forms/validation/ -->
+<div class="container">
+<div class="col-12 col-md-4">
+
+  
+  
+    <form id="user-form" class="card-body">
+      <label class="form-label" style="width: 18rem;" for="SearchCity">Search for City</label>
+      
+      <input name="username" id="searchforCity" type="text" autofocus="true" class="form-input" style="width: 18rem;"/>
+      <br>
+      <br>
+      <button type="submit" style="width: 18rem;" class="btn btn-primary main">Search</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<!-- https://getbootstrap.com/docs/5.2/components/buttons/ -->
+<!-- https://getbootstrap.com/docs/5.2/components/button-group/ -->
+
+<div class="container">
+  <div class="btn-group-horizontal providedCity">
+    <!-- id city-buttons allows us to make all the city's selection to work -->
+    <div id="city-buttons" class="card-body">
+  <button type="button" data-city="Austin" class="btn btn-secondary" style="width: 18rem;">Austin</button>
+  </div>
+  <br>
+  <div class="btn-group-horizontal providedCity">
+  <button type="button" data-city="Chicago" class="btn btn-secondary" style="width: 18rem;">Chicago</button>
+  </div>
+  <br>
+ <div class="btn-group-horizontal providedCity">
+ <button type="button" data-city="New york" class="btn btn-secondary" style="width: 18rem;">New York</button>
+ </div>
+ <br>
+ <div class="btn-group-horizontal providedCity">
+ <button type="button" data-city="Orlando" class="btn btn-secondary" style="width: 18rem;">Orlando</button>
+ </div>
+ <br>
+ <div class="btn-group-horizontal providedCity">
+ <button type="button" data-city="San Francisco" class="btn btn-secondary" style="width: 18rem;">San Francisco</button>
+ </div>
+ <br>
+ <div class="btn-group-horizontal providedCity">
+ <button type="button" data-city="Seattle" class="btn btn-secondary" style="width: 18rem;">Seattle</button>
+ </div>
+ <br>
+ <div class="btn-group-horizontal providedCity">
+ <button type="button" data-city="Denver" class="btn btn-secondary" style="width: 18rem;">Denver</button>
+ </div>
+ <br>
+ <div class="btn-group-horizontal providedCity">
+  <button type="button" data-city="Atlanta" class="btn btn-secondary" style="width: 18rem;">Atlanta</button>
+</div>
+</div>
+</div>
+<!-- https://getbootstrap.com/docs/5.0/layout/grid/ -->
+
+<!-- to move top -->
+<!-- https://getbootstrap.com/docs/4.0/utilities/position/ -->
+<div class="container">
+  <div class="justify-content-center right">
+    <!-- https://getbootstrap.com/docs/5.0/components/card/ -->
+    <div class="card" style="width: 50rem;">
+      
+      <div class="card-body" id="weatherContainer">
+        <h5 class="data-cityDisplay">City:</h5>
+        <p class="data-temp">Temp:</p>
+        <p class="data-wind">Wind:</p>
+        <p class="data-humidity">Humidity:</p>
+        <p class="data-uvindex">UV Index:</p>
+    </div>
+      </div>
+    </div>
+    <br>
+
+    <p>5-day Forecast:</p>
+    
+  </div>
+  <div class="container">
+<div class="d-flex down">
+  <div class="card">
+    <img src="" class="card-img-top" alt="day1">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This </p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src=" " class="card-img-top" alt="day2">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text"></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="" class="card-img-top" alt="day3">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text"></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="" class="card-img-top" alt="day4">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text"></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="" class="card-img-top" alt="day5">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text"></p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div>
+</div>
+</main>
+<script src="asset/script.js"></script>
+ </body>

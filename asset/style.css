@@ -1,0 +1,30 @@
+h1{
+  display: flex;
+  justify-content: center;
+  border: 30px;
+  background: linear-gradient(90deg, #141549 90%, #06043b 18%, #291f37 2%);
+  color: aliceblue;
+  padding: 10px;
+}
+
+.btn:hover{
+  background-color: rgb(12, 59, 41);
+}
+
+.right{
+ margin-top: -40%;
+ margin-left: 25%;
+}
+
+.col{
+  margin: black;
+  background-color: blue;
+}
+
+p{
+  margin-left: 25%;
+}
+
+.down{
+  margin-left: 25%;
+}
